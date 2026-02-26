@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>WonderAcute AR</title>
+    <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.5/dist/mindar-image-aframe.prod.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="loading">
+
+    <div id="overlay">
+        <div class="container">
+            <h1>WonderAcute AR</h1>
+            <p>下のマーカーをスキャンしてください</p>
+            <div class="marker-guide">
+                <div class="guide-item"><img src="img/wonderAcute1.jpg"><span>1</span></div>
+                <div class="guide-item"><img src="img/wonderAcute2.jpg"><span>2</span></div>
+                <div class="guide-item"><img src="img/wonderAcute3.jpg"><span>3</span></div>
+            </div>
+            <button id="startButton">ARを開始する</button>
+        </div>
+    </div>
+
+    <div id="ui-container">
+        <button id="backButton">タイトルへ戻る</button>
+        <button id="shopButton">グッズを見にいく</button>
+    </div>
+
+    <a-scene 
+        id="ar-scene"
+        mindar-image="imageTargetSrc: img/targets1.mind; autoStart: false; uiScanning: yes; uiLoading: no; uiError: no; filterMinCF: 0.0001; filterBeta: 0.001;" 
+        embedded
+        vr-mode-ui="enabled: false"
+        device-orientation-permission-ui="enabled: false"
+        color-space="sRGB" 
+        renderer="colorManagement: true; physicallyCorrectLights: true; transparent: true; alpha: true;" 
+        style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;">
+        
+        <a-assets>
+            <video id="v1" src="movie/wonderAcute1.mp4" preload="auto" loop="true" playsinline webkit-playsinline crossorigin="anonymous"></video>
+            <video id="v2" src="movie/wonderAcute2.mp4" preload="auto" loop="true" playsinline webkit-playsinline crossorigin="anonymous"></video>
+            <video id="v3" src="movie/wonderAcute3.mp4" preload="auto" loop="true" playsinline webkit-playsinline crossorigin="anonymous"></video>
+        </a-assets>
+
+        <a-camera position="0 0 0" look-controls="enabled: false" wasd-controls="enabled: false"></a-camera>
+
+        <a-entity id="target-0" mindar-image-target="targetIndex: 0">
+            <a-video src="#v1" width="1.6" height="0.9" position="0 0 0" material="shader: flat;"></a-video>
+        </a-entity>
+
+        <a-entity id="target-1" mindar-image-target="targetIndex: 1">
+            <a-video src="#v2" width="1" height="1.77" position="0 0 0" material="shader: flat;"></a-video>
+        </a-entity>
+
+        <a-entity id="target-2" mindar-image-target="targetIndex: 2">
+            <a-video src="#v3" width="1.6" height="0.9" position="0 0 0" material="shader: flat;"></a-video>
+        </a-entity>
+    </a-scene>
+
+    <script src="main.js"></script>
+</body>
+</html>
